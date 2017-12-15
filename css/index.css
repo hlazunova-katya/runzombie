@@ -1,0 +1,141 @@
+@font-face{font-family:Necropsia;src:url("./fonts/Necropsia.ttf")}
+@font-face {
+    font-family: FA;
+    src: url("./fonts/fontawesome-webfont.woff2");
+}
+* {
+    margin-right: 0;
+    padding: 0;
+}
+a, a:hover, a>* {
+    text-decoration: none;
+    color: initial;
+}
+body {
+    position: relative; 
+    background: rgba(228, 225, 225, 0.4);
+}
+.navbar-brand.logo{
+    font-family: Necropsia;
+    font-size: 30px;   
+    color: #d43939;
+}
+.navbar-nav > li {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.chapter {
+    padding-top: 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+}
+.section-heading {
+    font-family: Necropsia;
+}
+p {
+    font-size: 18px;
+}
+.controls-spacebar {
+    width: 140px;
+}
+.screenshots-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.screenshot {
+    width: 360px;
+    height: 230px;
+    margin: 20px;
+}
+.playBtn{
+    display: flex;
+    width: 160px;
+    height: 65px;
+    justify-content: center;
+    align-items: center;
+    background: #d43939;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 7px #f76c78;
+    color: #000;
+}
+.playBtn:hover{
+    color: #000;
+    opacity: 0.7;
+    box-shadow: 0 0 25px 2px #f76c78;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
+.about-holder{
+    display: flex;
+    justify-content: space-evenly;
+}
+.about-article{
+    width: 30%;
+}
+.about-article h2{
+    text-align: center;
+    width: 100%;
+}
+.about-article p{
+    text-align: center;
+}
+.about-article.characters{
+    display: flex;
+    flex-wrap: wrap;
+}
+.characters figcaption{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    justify-content: flex-end;
+}
+.characters img {
+    width: 70%;
+}
+.dev-photo{
+    border-radius: 50%;
+    width: 300px;
+}
+.gh-link::before{
+    font-family: FA;
+    color: initial;
+    font-size: 30px;
+    content: "\f09b";
+}
+.gh-link:hover {
+    opacity: 0.7;
+}
+.fio{
+    font-size: 18px;
+    font-weight: 550;
+}
+.developer-figcaption{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.play-icon::before{
+    font-family: FA;
+    font-size: 60px;
+    content: "\f04b";
+    font-style: normal;
+    color: #d43939;
+}
+.play-btn{
+    position: fixed;
+    top: 55px;
+    right: 35px;
+    opacity: 0.4;
+}
+.play-btn:hover{
+    opacity: 1;
+}

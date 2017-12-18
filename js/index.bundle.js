@@ -153,11 +153,11 @@ const score = new __WEBPACK_IMPORTED_MODULE_8__Score__["a" /* default */]();
 const dieAudio = new __WEBPACK_IMPORTED_MODULE_6__Audio__["a" /* default */]('./assets/audio/die.wav');
 
 const bg = new __WEBPACK_IMPORTED_MODULE_2__Background__["a" /* default */](bgCanvas);
-const run = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */]('run', heroCanvas.canvas.height, false, false, 10),
-    jump = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */]('jump', heroCanvas.canvas.height, true, false, 15);
+let run = null,
+    jump = null;
 
-let coins = Object(__WEBPACK_IMPORTED_MODULE_4__createCoins__["a" /* default */])(run.posY + run.height / 1.5, __WEBPACK_IMPORTED_MODULE_10__level1__["a" /* default */]),
-    cactuses = Object(__WEBPACK_IMPORTED_MODULE_5__createCactuses__["a" /* default */])(run.posY + run.height / 2, __WEBPACK_IMPORTED_MODULE_10__level1__["a" /* default */]);
+let coins = null,
+    cactuses = null;
 
 let isRender = null,
     hero = null;
@@ -218,6 +218,8 @@ function heroSwitch() {
 }
 function gameInit() {
     score.restart();
+    run = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */]('run', heroCanvas.canvas.height, false, false, 10);
+    jump = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */]('jump', heroCanvas.canvas.height, true, false, 15);
     coins = Object(__WEBPACK_IMPORTED_MODULE_4__createCoins__["a" /* default */])(run.posY + run.height / 1.5, __WEBPACK_IMPORTED_MODULE_10__level1__["a" /* default */]);
     cactuses = Object(__WEBPACK_IMPORTED_MODULE_5__createCactuses__["a" /* default */])(run.posY + run.height / 2, __WEBPACK_IMPORTED_MODULE_10__level1__["a" /* default */]);
     hero = run;
@@ -671,7 +673,17 @@ restartBtn.addEventListener ('click', (event) => {
     document.body.removeChild (overlay);
     Object(__WEBPACK_IMPORTED_MODULE_0__index__["default"]) ();
 });
-
+//because there is no second level, we will start the first one again :)
+nextLvlBtn.addEventListener ('click', (event) => {
+    event.preventDefault ();
+    BtnsSection.removeChild (backBtn);
+    BtnsSection.removeChild (nextLvlBtn);
+    modal.removeChild (p);
+    modal.removeChild (BtnsSection);
+    overlay.removeChild(modal);
+    document.body.removeChild (overlay);
+    Object(__WEBPACK_IMPORTED_MODULE_0__index__["default"]) ();
+});
 /* harmony default export */ __webpack_exports__["a"] = (function (type, score) {
     p.innerText =
         type === 'win'

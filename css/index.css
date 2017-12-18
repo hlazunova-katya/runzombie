@@ -3,15 +3,14 @@
     font-family: FA;
     src: url("./fonts/fontawesome-webfont.woff2");
 }
-* {
-    margin-right: 0;
-    padding: 0;
-}
+
 a, a:hover, a>* {
     text-decoration: none;
-    color: initial;
+    color: initial; 
 }
 body {
+    margin: 0;
+    padding: 0;
     position: relative; 
     background: rgba(228, 225, 225, 0.4);
 }
@@ -24,7 +23,7 @@ body {
     font-size: 14px;
     text-transform: uppercase;
 }
-.chapter {
+.fp-tableCell {
     padding-top: 50px;
     min-height: 100vh;
     display: flex;
@@ -35,9 +34,15 @@ body {
 }
 .section-heading {
     font-family: Necropsia;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
 }
 p {
+    margin: 0;
+    padding: 0;
     font-size: 18px;
+    text-align: center;
 }
 .controls-spacebar {
     width: 140px;
@@ -47,11 +52,6 @@ p {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-}
-.screenshot {
-    width: 360px;
-    height: 230px;
-    margin: 20px;
 }
 .playBtn{
     display: flex;
@@ -77,15 +77,9 @@ p {
     display: flex;
     justify-content: space-evenly;
 }
-.about-article{
-    width: 30%;
-}
 .about-article h2{
     text-align: center;
     width: 100%;
-}
-.about-article p{
-    text-align: center;
 }
 .about-article.characters{
     display: flex;
@@ -138,4 +132,46 @@ p {
 }
 .play-btn:hover{
     opacity: 1;
+}
+footer {
+    background: #222;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer {
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #9d9d9d;
+}
+.footer p{
+    font-size: 12px;
+    width: 20%;
+}
+.footer span {
+    font-size: 15px;
+}
+.screenshot-hover{
+    display: none;
+}
+.image-link:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+.image-link:hover .screenshot-hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%; 
+    position: absolute;
 }

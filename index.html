@@ -6,32 +6,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <link rel="stylesheet" href="css/magnificPopup.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<body class="row">
 
-    <header class="navbar navbar-inverse navbar-fixed-top col-md-12">
+    <header id="myNavbar" class="navbar navbar-inverse navbar-fixed-top col-md-12">
         <div class="container-fluid header-container col-md-12">
             <div class="navbar-header">
                 <a class="navbar-brand logo" href="#">run, zombie</a>
             </div>
             <div>
                 <nav class="" id="">
-                    <ul class="nav navbar-nav">
-                        <li>
+                    <ul class="nav navbar-nav" id="menu">
+                        <li data-menuanchor="sectionAbout">
                             <a href="#sectionAbout">about</a>
                         </li>
-                        <li>
+                        <li data-menuanchor="sectionControls">
                             <a href="#sectionControls">controls</a>
                         </li>
-                        <li>
+                        <li data-menuanchor="sectionScreenshots">
                             <a href="#sectionScreenshots">screenshots</a>
                         </li>
-                        <li>
+                        <li data-menuanchor="sectionPlay">
                             <a href="#sectionPlay">play</a>
                         </li>
-                        <li>
+                        <li data-menuanchor="sectionDeveloper">
                             <a href="#sectionDeveloper">developer</a>
                         </li>
                     </ul>
@@ -40,87 +42,142 @@
         </div>
     </header>
 
-    <section id="sectionAbout" class="chapter">
-        <h1 class="section-heading">About</h1>
+    <main id="fullpage">
+        <section id="section0" class="section chapter row" data-anchor="sectionAbout">
+            <h1 class="section-heading">About</h1>
 
-        <section class="about-holder">
-            <article class="about-article">
-                <h2>Genre</h2>
-                <p>It is an
-                    <i>endless runner </i> browser game, built using JavaScript & HTML5.</p>
-            </article>
+            <section class="about-holder col-md-12 col-sm-12">
+                <article class="about-article col-md-4 col-sm-12">
+                    <h2>Genre</h2>
+                    <p>It is an
+                        <i>endless runner </i> browser game, built using JavaScript & HTML5.</p>
+                </article>
 
-            <article class="about-article">
-                <h2>What to do</h2>
-                <p>Run, zombie. By the way, try to pick up as many coins as possible. </p>
-                <p>P.S.: nobody knows why, but zombies are afraid of cactuses, so avoid them!</p>
-            </article>
+                <article class="about-article col-md-4 col-sm-12">
+                    <h2>What to do</h2>
+                    <p>Run, zombie. By the way, try to pick up as many coins as possible. </p>
+                    <p>P.S.: nobody knows why, but zombies are afraid of cactuses, so avoid them!</p>
+                </article>
 
-            <article class="about-article characters">
-                <h2>Main characters</h2>
-                <figcaption>
-                    <img src="./img/character.png" alt="zombie">
-                    <caption>You</caption>
-                </figcaption>
-                <figcaption>
-                    <img src="./img/coin.png" alt="coin">
-                    <caption>Coin</caption>
-                </figcaption>
-                <figcaption>
-                    <img src="./img/enemy.png" alt="cactus">
-                    <caption>Your enemy</caption>
-                </figcaption>
-            </article>
-        </section>
-
-    </section>
-
-    <section id="sectionControls" class="chapter">
-        <h1 class="section-heading">Controls</h1>
-
-        <p>Use
-            <img src="./img/spacebar.png" alt="spacebar" class="controls-spacebar"/>
-             to jump 
-        </p>
-
-    </section>
-
-    <section id="sectionScreenshots" class="chapter">
-        <h1 class="section-heading">Screenshots</h1>
-        <section class="screenshots-holder">
-
-            <img src="./img/screen1.png" alt="screenshot" class="screenshot">
-            <img src="./img/screen2.png" alt="screenshot" class="screenshot">
-            <img src="./img/screen3.png" alt="screenshot" class="screenshot">
+                <article class="about-article col-sm-12 col-md-4 characters">
+                    <h2>Main characters</h2>
+                    <figcaption>
+                        <img src="./img/character.png" alt="zombie">
+                        <caption>You</caption>
+                    </figcaption>
+                    <figcaption>
+                        <img src="./img/coin.png" alt="coin">
+                        <caption>Coin</caption>
+                    </figcaption>
+                    <figcaption>
+                        <img src="./img/enemy.png" alt="cactus">
+                        <caption>Your enemy</caption>
+                    </figcaption>
+                </article>
+            </section>
 
         </section>
-    </section>
 
-    <section id="sectionPlay" class="chapter">
-        <h1 class="section-heading">
-            <a href="game.html" class="playBtn">Play</a>
-        </h1>
-        <p>Try not to die</p>
+        <section id="section1" class="section chapter" data-anchor="sectionControls">
+            <h1 class="section-heading">Controls</h1>
 
-    </section>
+            <p>Use
+                <img src="./img/spacebar.png" alt="spacebar" class="controls-spacebar" /> to jump
+            </p>
 
-    <section id="sectionDeveloper" class="chapter">
-        <h1 class="section-heading">Developer</h1>
-        <figcaption class="developer-figcaption">
-            <img src="./img/dev-photo.jpg" alt="photo" class="dev-photo">
-            <caption class="dev-photo-caption">
-                <span class="fio">Hlazunova Kasia</span>
-                <a href="https://github.com/hlazunova-katya" class="gh-link"></a>
-            </caption>
-        </figcaption>
-    </section>
+        </section>
+
+        <section id="section2" class="section chapter" data-anchor="sectionScreenshots">
+            <h1 class="section-heading">Screenshots</h1>
+            <section class="screenshots-holder row">
+                <figure class="image-link col-md-4 col-sm-8">
+
+                    <a href="./img/screen1.png">
+                        <div class="screenshot-hover">
+                            <img src="./img/stretch.png" alt="stretch">
+                        </div>
+                        <img src="./img/screen1.png" alt="screenshot" class="img-responsive">
+                    </a>
+                </figure>
+                <figure class="image-link col-md-4 col-sm-8">
+
+                    <a href="./img/screen2.png">
+                        <div class="screenshot-hover">
+                            <img src="./img/stretch.png" alt="stretch">
+                        </div>
+                        <img src="./img/screen2.png" alt="screenshot" class="img-responsive">
+                    </a>
+                </figure>
+                <figure class="image-link col-md-4 col-sm-8">
+
+                    <a href="./img/screen3.png">
+                        <div class="screenshot-hover">
+                            <img src="./img/stretch.png" alt="stretch">
+                        </div>
+                        <img src="./img/screen3.png" alt="screenshot" class="img-responsive">
+                    </a>
+                </figure>
+
+            </section>
+        </section>
+
+        <section id="section3" class="section chapter" data-anchor="sectionPlay">
+            <h1 class="section-heading">
+                <a href="game.html" class="playBtn">Play</a>
+            </h1>
+            <p>Try not to die</p>
+
+        </section>
+
+        <section id="section4" class="section chapter" data-anchor="sectionDeveloper">
+            <h1 class="section-heading">Developer</h1>
+            <figcaption class="developer-figcaption">
+                <img src="./img/dev-photo.jpg" alt="photo" class="dev-photo">
+                <caption class="dev-photo-caption">
+                    <span class="fio">Hlazunova Kasia</span>
+                    <a href="https://github.com/hlazunova-katya" class="gh-link"></a>
+                </caption>
+            </figcaption>
+            <footer>
+                <div class="footer">
+                    <p>The game is made for Rolling Scopes School Minsk in 2017</p>
+                    <span>I</span>
+                    <p>All pictures and sounds are found on the internet</p>
+
+                    <span>I</span>
+                    <p>© Hlazunova Kasia</p>
+                </div>
+            </footer>
+        </section>
+
+
+    </main>
+
     <div class="play-btn">
         <a href="game.html" title="start playing">
             <i class="play-icon"></i>
         </a>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/magnificPopup.js"></script>
+    <script src="js/jquery.fullPage.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $("#fullpage").fullpage({
+                anchors: ['sectionAbout', 'sectionControls', 'sectionScreenshots', 'sectionPlay',
+                    'sectionDeveloper'
+                ],
+                menu: '#menu',
+                scrollBar: false
+            });
+        })
+        $('.image-link').magnificPopup({
+            delegate: 'a',
+            type: 'image'
+        });
+
+    </script>
 </body>
 
 </html>

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,7 +68,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__atlas__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__atlas__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__atlas___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__atlas__);
 
 
@@ -147,21 +147,6 @@ class Cactus {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// 1 - coin,
-// 2 - cactus
-
-/* harmony default export */ __webpack_exports__["a"] = ([
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 2, 0, 1, 1, 1, 1, 1, 0, 2, 0, 1, 1, 0, 2, 1, 0, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 1]
-]);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 class Audio {
     constructor(src) {
         this.sound = document.createElement ('audio');
@@ -184,22 +169,24 @@ class Audio {
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game_scss__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game_scss__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__game_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Canvas__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Background__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Hero__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createCoins__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__createCactuses__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Audio__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__catchCoin__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Score__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__getModal__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Canvas__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Background__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Hero__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createCoins__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__createCactuses__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Audio__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__catchCoin__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Score__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__getModal__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__level1__ = __webpack_require__(15);
+
 
 
 
@@ -233,8 +220,8 @@ const bg = new __WEBPACK_IMPORTED_MODULE_2__Background__["a" /* default */] (bgC
 const run = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */] ('run', heroCanvas.canvas.height, false, false, 10);
 const jump = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */] ('jump', heroCanvas.canvas.height, true, false, 15);
 
-const coins = Object(__WEBPACK_IMPORTED_MODULE_4__createCoins__["a" /* default */]) (run.posY + run.height / 1.5);
-const cactuses = Object(__WEBPACK_IMPORTED_MODULE_5__createCactuses__["a" /* default */]) (run.posY + run.height / 2);
+const coins = Object(__WEBPACK_IMPORTED_MODULE_4__createCoins__["a" /* default */]) (run.posY + run.height / 1.5, __WEBPACK_IMPORTED_MODULE_10__level1__["a" /* default */]);
+const cactuses = Object(__WEBPACK_IMPORTED_MODULE_5__createCactuses__["a" /* default */]) (run.posY + run.height / 2, __WEBPACK_IMPORTED_MODULE_10__level1__["a" /* default */]);
 
 let isRender = true;
 
@@ -246,7 +233,7 @@ function mainLoop() {
         heroSwitch ();
         checkWin ();
         Object(__WEBPACK_IMPORTED_MODULE_7__catchCoin__["a" /* default */]) (hero, coins, score);
-        checkDead ();
+        if (cactuses.length) {checkDead ();}
         coinCanvas.render (coins.concat (cactuses));
         heroCanvas.render ([hero]);
         bgCanvas.render (bg, window.performance.now ());
@@ -281,7 +268,6 @@ function checkDead() {
         dieAudio.play ();
         isRender = false;
         Object(__WEBPACK_IMPORTED_MODULE_9__getModal__["a" /* default */]) ('loose', score.score);
-        console.log (hero.posX, cactuses[0].posX);
     }
 }
 function heroSwitch() {
@@ -307,13 +293,13 @@ window.onkeydown = event => {
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -352,9 +338,9 @@ class Canvas {
     }
     drawCactus(item) {
         item.tick++;
-        if (item.tick > 5) {
+        if (item.tick > 4) {
             item.tick = 0;
-            item.posX -= 35;
+            item.posX -= 30;
         }
         this.ctx.drawImage (
             item.img,
@@ -384,26 +370,23 @@ class Canvas {
         );
 
         if (item.tickCount > item.speed) {
+            
             item.tickCount = 0;
             if (item instanceof __WEBPACK_IMPORTED_MODULE_0__Coin__["a" /* default */]) {
-                item.posX -= 35;
+                item.posX -= 30;
             }
             if (item.isJump) {
                 if (item.frameIndex === 0 || item.frameIndex === 1) {
                     item.posY -= 150;
-                    //item.posX += 100;
                 }
                 if (item.frameIndex === 2) {
                     item.posY += 100;
-                    //item.posX -= 25;
                 }
                 if (item.frameIndex === 3) {
                     item.posY += 170;
-                    //item.posX -= 35;
                 }
                 if (item.frameIndex === 4) {
-                    item.posY = item.initPosY;
-                    //item.posX = item.initPosX;
+                    item.posY += 30;
                     item.isJump = false;
                 }
             }
@@ -412,6 +395,8 @@ class Canvas {
             } else {
                 item.frameIndex++;
             }
+            item.width = item.frames [item.frameIndex].w / item.sizeDelimiter;
+            item.height = item.frames [item.frameIndex].h / item.sizeDelimiter;
         }
     }
     drawBackground(element, time) {
@@ -440,13 +425,13 @@ class Canvas {
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = {"die":{"Dead1.png":{"x":21,"y":727,"w":207,"h":401},"Dead2.png":{"x":1116,"y":302,"w":276,"h":377},"Dead3.png":{"x":742,"y":302,"w":347,"h":349},"Dead4.png":{"x":21,"y":302,"w":425,"h":300},"Dead5.png":{"x":1467,"y":21,"w":417,"h":254},"Dead6.png":{"x":21,"y":21,"w":439,"h":172},"Dead7.png":{"x":487,"y":21,"w":470,"h":186},"Dead8.png":{"x":984,"y":21,"w":456,"h":208}},"jump":{"Jump2.png":{"x":473,"y":302,"w":242,"h":330},"Jump3.png":{"x":1308,"y":1163,"w":224,"h":445},"Jump4.png":{"x":1559,"y":1163,"w":227,"h":447},"Jump5.png":{"x":21,"y":1637,"w":216,"h":479},"Jump6.png":{"x":1096,"y":1163,"w":185,"h":418}},"run":{"Run5.png":{"x":1584,"y":727,"w":229,"h":409},"Run6.png":{"x":21,"y":1163,"w":299,"h":413},"Run7.png":{"x":1223,"y":727,"w":334,"h":407},"Run8.png":{"x":1419,"y":302,"w":286,"h":380},"Run9.png":{"x":347,"y":1163,"w":248,"h":414},"Run10.png":{"x":1732,"y":302,"w":267,"h":398}},"coin":{"Silver_21.png":{"x":21,"y":2819,"w":563,"h":564},"Silver_22.png":{"x":1138,"y":2228,"w":559,"h":564},"Silver_23.png":{"x":607,"y":2228,"w":504,"h":564},"Silver_24.png":{"x":1066,"y":2819,"w":428,"h":565},"Silver_25.png":{"x":929,"y":1637,"w":262,"h":564},"Silver_26.png":{"x":264,"y":1637,"w":108,"h":564},"Silver_27.png":{"x":1218,"y":1637,"w":262,"h":564},"Silver_28.png":{"x":611,"y":2819,"w":428,"h":565},"Silver_29.png":{"x":399,"y":1637,"w":503,"h":564},"Silver_30.png":{"x":21,"y":2228,"w":559,"h":564}}}
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -488,7 +473,7 @@ class Background {
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -500,67 +485,28 @@ class Hero extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
         super (name, speed, 2);
         this.isJump = isJump;
         this.isDie = isDie;
-        this.initPosX = name !== 'jump' ? 200 : 150;
-        this.initPosY =
+        this.posX = 200;
+        this.posY =
             name !== 'jump'
                 ? canvasHeight - this.height
                 : canvasHeight - this.height - 15;
-        this.posX = this.initPosX;
-        this.posY = this.initPosY;
     }
     crashWith(otherobj) {
-        const myright = this.posX + this.width;
-        const mytop = this.posY - this.height;
-        const mybottom = this.posY;
-        const otherleft = otherobj.posX;
-        const othertop = otherobj.posY - otherobj.height;
-        const otherbottom = otherobj.posY;
-        const myleft = this.posX;
+        const myleft = this.posX + 10;
+        const mytop = this.posY - 40;
+        const myright = this.posX + this.width - 20;
+        const mybottom = this.posY + this.height - 30;
+        const otherleft = otherobj.posX + 10;
+        const othertop = otherobj.posY + 10;
         const otherright = otherobj.posX + otherobj.width;
-        let crash = false;
+        const otherbottom = otherobj.posY + otherobj.height;
 
-        if (
-            (mybottom >= othertop &&
-                mybottom <= otherbottom &&
-                myright > otherleft &&
-                myright <= otherright) ||
-            (mybottom >= othertop &&
-                mybottom <= otherbottom &&
-                myleft >= otherleft &&
-                myleft <= otherright) ||
-            (mybottom >= othertop &&
-                mybottom <= otherbottom &&
-                myright >= otherright &&
-                myleft <= otherleft) ||
-            (mytop < otherbottom &&
-                mytop > othertop &&
-                myleft > otherleft &&
-                myleft < otherright) ||
-            (mytop < otherbottom &&
-                mytop > othertop &&
-                myright < otherright &&
-                myright > otherleft) ||
-            (mytop < otherbottom &&
-                mytop > othertop &&
-                myright > otherright &&
-                myleft < otherleft) ||
-            (mytop > othertop &&
-                mytop < otherbottom &&
-                myright > otherleft &&
-                myright < otherright) ||
-            (mytop > othertop &&
-                mytop < otherbottom &&
-                myleft > otherleft &&
-                myleft < otherright) ||
-            (mytop < othertop &&
-                mybottom > otherbottom &&
-                myleft < otherleft &&
-                myright > otherright)
-        ) {
-            crash = true;
-        }
-
-        return crash;
+        return myright < otherleft ||
+            mybottom < othertop ||
+            myleft > otherright ||
+            mytop > otherbottom
+            ? false
+            : true;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Hero;
@@ -568,27 +514,25 @@ class Hero extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Coin__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__level1__ = __webpack_require__(3);
 
 
-
-/* harmony default export */ __webpack_exports__["a"] = (function(heroY) {
+/* harmony default export */ __webpack_exports__["a"] = (function(posY, arr) {
     const coins = [];
-    const pos = { x: 200, y: heroY };
+    const pos = { x: 200, y: posY };
 
-    for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_1__level1__["a" /* default */].length; i++) {
-        for (let j = 0; j < __WEBPACK_IMPORTED_MODULE_1__level1__["a" /* default */][i].length; j++) {
-            if (__WEBPACK_IMPORTED_MODULE_1__level1__["a" /* default */][i][j]===1) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr[i].length; j++) {
+            if (arr[i][j]===1) {
                 const coin = new __WEBPACK_IMPORTED_MODULE_0__Coin__["a" /* default */] (
                 'coin',
-                5,
+                4,
                 pos.x + 100 * j,
-                pos.y - 100 * (__WEBPACK_IMPORTED_MODULE_1__level1__["a" /* default */].length - i)
+                pos.y - 100 * (arr.length - i)
             );
             coins.push (coin);
             } 
@@ -599,23 +543,21 @@ class Hero extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__level1__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Cactus__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Cactus__ = __webpack_require__(2);
 
 
-
-/* harmony default export */ __webpack_exports__["a"] = (function (heroY) {
+/* harmony default export */ __webpack_exports__["a"] = (function (posY, arr) {
     const cactuses = [];
-    const pos = { x: 200, y: heroY };
+    const pos = { x: 200, y: posY };
 
-    for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_0__level1__["a" /* default */].length; i++) {
-        for (let j = 0; j < __WEBPACK_IMPORTED_MODULE_0__level1__["a" /* default */][i].length; j++) {
-            if (__WEBPACK_IMPORTED_MODULE_0__level1__["a" /* default */][i][j]===2) {
-                const cactus = new __WEBPACK_IMPORTED_MODULE_1__Cactus__["a" /* default */] (
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr[i].length; j++) {
+            if (arr[i][j]===2) {
+                const cactus = new __WEBPACK_IMPORTED_MODULE_0__Cactus__["a" /* default */] (
                 pos.x + 100 * j,
                 pos.y - 42
             );
@@ -628,11 +570,11 @@ class Hero extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Audio__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Audio__ = __webpack_require__(3);
 
 
 const coinPickSound = new __WEBPACK_IMPORTED_MODULE_0__Audio__["a" /* default */] ('./assets/audio/coinPick.wav');
@@ -650,7 +592,7 @@ const coinPickSound = new __WEBPACK_IMPORTED_MODULE_0__Audio__["a" /* default */
 });
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -674,27 +616,63 @@ class Score {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = (function(type, score) {
-    const overlay = document.createElement ('div');
-    const modal = document.createElement ('section');
-    const p = document.createElement ('p');
+const overlay = document.createElement ('div');
+const modal = document.createElement ('section');
+const p = document.createElement ('p');
+const BtnsSection = document.createElement ('section');
+const restartBtn = document.createElement ('a');
+const nextLvlBtn = document.createElement ('a');
+const backBtn = document.createElement ('a');
 
+restartBtn.id = 'restart';
+nextLvlBtn.id = 'nextLvl';
+
+backBtn.href = 'index.html';
+restartBtn.href = '#';
+nextLvlBtn.href = '#';
+
+backBtn.innerText = 'back';
+restartBtn.innerText = 'restart';
+nextLvlBtn.innerText = 'next lvl';
+
+overlay.classList.add ('overlay');
+modal.classList.add ('modal');
+BtnsSection.classList.add ('btns-section');
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function (type, score) {
     p.innerText =
         type === 'win'
             ? `you finished with a score of ${score}`
             : `you are a looser, but you got ${score} points`;
-    overlay.classList.add ('overlay');
-    modal.classList.add ('modal');
 
+    BtnsSection.appendChild (type === 'win' ? nextLvlBtn : restartBtn);
+    BtnsSection.appendChild (backBtn);
     modal.appendChild (p);
+    modal.appendChild (BtnsSection);
     overlay.appendChild (modal);
     document.body.appendChild (overlay);
 });
 
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// 1 - coin,
+// 2 - cactus
+
+/* harmony default export */ __webpack_exports__["a"] = ([
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0],
+    [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 2, 0, 1, 1, 1, 1, 1, 0, 2, 0, 1, 1, 0, 2, 1, 0, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 1]
+]);
 
 /***/ })
 /******/ ]);

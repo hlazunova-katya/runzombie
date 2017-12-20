@@ -287,8 +287,6 @@ function gameInit() {
     isRender = true;
 }
 window.addEventListener('load', event => {
-    const loader = document.getElementById('loader');
-    document.body.removeChild(loader);
     gameInit();
     mainLoop();
 });

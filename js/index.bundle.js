@@ -207,8 +207,8 @@ const bgCanvas = new __WEBPACK_IMPORTED_MODULE_1__Canvas__["a" /* default */](wi
     );
 
 const score = new __WEBPACK_IMPORTED_MODULE_8__Score__["a" /* default */]();
-const mainAudio = new __WEBPACK_IMPORTED_MODULE_6__Audio__["a" /* default */] ('./assets/audio/background-music.mp3');
-mainAudio.sound.setAttribute ('loop', 'true');
+const mainAudio = new __WEBPACK_IMPORTED_MODULE_6__Audio__["a" /* default */]('./assets/audio/background-music.mp3');
+mainAudio.sound.setAttribute('loop', 'true');
 
 const bg = new __WEBPACK_IMPORTED_MODULE_2__Background__["a" /* default */](bgCanvas);
 let run = null,
@@ -254,14 +254,14 @@ function areOnStage() {
 }
 function checkWin() {
     if (coins.length === 0) {
-        mainAudio.stop ();
+        mainAudio.stop();
         isRender = false;
         Object(__WEBPACK_IMPORTED_MODULE_9__getModal__["a" /* default */])('win', score.score);
     }
 }
 function checkDead() {
     if (hero.crashWith(cactuses[0])) {
-        mainAudio.stop ();
+        mainAudio.stop();
         isRender = false;
         Object(__WEBPACK_IMPORTED_MODULE_9__getModal__["a" /* default */])('loose', score.score);
     }
@@ -283,21 +283,24 @@ function gameInit() {
     coins = Object(__WEBPACK_IMPORTED_MODULE_4__createCoins__["a" /* default */])(run.posY + run.height / 1.5, levelScheme);
     cactuses = Object(__WEBPACK_IMPORTED_MODULE_5__createCactuses__["a" /* default */])(run.posY + run.height / 2, levelScheme);
     hero = run;
-    mainAudio.play ();
+    mainAudio.play();
     isRender = true;
 }
 window.addEventListener('load', event => {
+    const loader = document.getElementById('loader');
+    document.body.removeChild(loader);
     gameInit();
-        mainLoop();
+    mainLoop();
 });
 window.addEventListener('keydown', event => {
     if (event.keyCode === 32) {
-        event.preventDefault ();
+        event.preventDefault();
         if (hero === run) {
             hero.isJump = true;
         }
     }
 });
+
 
 /***/ }),
 /* 4 */
@@ -359,29 +362,31 @@ class Cactus {
 
 class Canvas {
     constructor(width, height, id, zIndex) {
-        this.canvas = document.createElement ('canvas');
+        this.canvas = document.createElement('canvas');
         this.canvas.width = width;
         this.canvas.height = height;
         this.canvas.id = id;
         this.canvas.style.zIndex = zIndex;
-        this.ctx = this.canvas.getContext ('2d');
-        document.body.appendChild (this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+        document.body.appendChild(this.canvas);
     }
     render(elements, time) {
-        this.ctx.save ();
-        this.ctx.clearRect (0, 0, this.canvas.width, this.canvas.height);
-        if (Array.isArray (elements)) {
-            elements.forEach (item => {
-                if (item instanceof __WEBPACK_IMPORTED_MODULE_1__SpriteSheet__["a" /* default */]) {
-                    this.drawSprite (item);
-                } else if (item instanceof __WEBPACK_IMPORTED_MODULE_2__Cactus__["a" /* default */]) {
-                    this.drawCactus (item);
-                }
+        this.ctx.save();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        if (Array.isArray(elements)) {
+            elements.forEach(item => {
+                // if (item.posX < window.innerWidth) {
+                    if (item instanceof __WEBPACK_IMPORTED_MODULE_1__SpriteSheet__["a" /* default */]) {
+                        this.drawSprite(item);
+                    } else if (item instanceof __WEBPACK_IMPORTED_MODULE_2__Cactus__["a" /* default */]) {
+                        this.drawCactus(item);
+                    }
+                // }
             });
         } else {
-            this.drawBackground (elements, time);
+            this.drawBackground(elements, time);
         }
-        this.ctx.restore ();
+        this.ctx.restore();
     }
     drawCactus(item) {
         item.tick++;
@@ -389,7 +394,7 @@ class Canvas {
             item.tick = 0;
             item.posX -= 30;
         }
-        this.ctx.drawImage (
+        this.ctx.drawImage(
             item.img,
             0,
             0,
@@ -404,7 +409,7 @@ class Canvas {
     drawSprite(item) {
         const spt = item.frames[item.frameIndex];
         item.tickCount += 1;
-        this.ctx.drawImage (
+        this.ctx.drawImage(
             item.img,
             spt.x,
             spt.y,
@@ -417,7 +422,6 @@ class Canvas {
         );
 
         if (item.tickCount > item.speed) {
-            
             item.tickCount = 0;
             if (item instanceof __WEBPACK_IMPORTED_MODULE_0__Coin__["a" /* default */]) {
                 item.posX -= 30;
@@ -442,28 +446,28 @@ class Canvas {
             } else {
                 item.frameIndex++;
             }
-            item.width = item.frames [item.frameIndex].w / item.sizeDelimiter;
-            item.height = item.frames [item.frameIndex].h / item.sizeDelimiter;
+            item.width = item.frames[item.frameIndex].w / item.sizeDelimiter;
+            item.height = item.frames[item.frameIndex].h / item.sizeDelimiter;
         }
     }
     drawBackground(element, time) {
-        element.distance += element.calcOffset (time);
+        element.distance += element.calcOffset(time);
         if (element.distance > this.canvas.width) {
             element.distance = 0;
         }
-        this.ctx.translate (-element.distance, 0);
+        this.ctx.translate(-element.distance, 0);
         for (const img of element.imgs) {
             let posY = 0,
                 { height } = this.canvas;
-            if (img.src.includes ('layer2')) {
+            if (img.src.includes('layer2')) {
                 posY = height - 275;
                 height = 275;
-            } else if (img.src.includes ('layer3')) {
+            } else if (img.src.includes('layer3')) {
                 posY = height - 120;
                 height = 120;
             }
-            this.ctx.drawImage (img, img.width, posY, this.canvas.width, height);
-            this.ctx.drawImage (img, 0, posY, this.canvas.width, height);
+            this.ctx.drawImage(img, img.width, posY, this.canvas.width, height);
+            this.ctx.drawImage(img, 0, posY, this.canvas.width, height);
         }
     }
 }

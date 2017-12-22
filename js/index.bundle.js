@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -108,6 +108,203 @@ class SpriteSheet {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+class Audio {
+    constructor(src) {
+        this.sound = document.createElement ('audio');
+        this.sound.src = src;
+        this.sound.setAttribute ('preload', 'auto');
+        this.sound.setAttribute ('controls', 'none');
+        this.sound.style.display = 'none';
+        document.body.appendChild (this.sound);
+    }
+
+    play() {
+        this.sound.currentTime = 0;
+        this.sound.play ();
+    }
+    stop() {
+        this.sound.pause ();
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Audio;
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__levels__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__levels___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__levels__);
+
+
+let level = 1;
+const max = Object.keys(__WEBPACK_IMPORTED_MODULE_0__levels___default.a).length;
+
+class LevelHandler {
+    static get level () {
+        return level;
+    }    
+    static nextLevel () {
+       if (level < max) {
+           level++;
+       }
+    }
+    static isMoreLevels () {
+        return level < max;
+    }
+    static getLevelScheme () {
+        return  __WEBPACK_IMPORTED_MODULE_0__levels___default.a[level];
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = LevelHandler;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["default"] = gameInit;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game_scss__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__game_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Canvas__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Background__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Hero__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createCoins__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__createCactuses__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Audio__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__catchCoin__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Score__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__getModal__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__LevelHandler__ = __webpack_require__(2);
+
+
+
+
+
+
+
+
+
+
+
+
+const bgCanvas = new __WEBPACK_IMPORTED_MODULE_1__Canvas__["a" /* default */](window.innerWidth, window.innerHeight, 'bg', 0),
+    heroCanvas = new __WEBPACK_IMPORTED_MODULE_1__Canvas__["a" /* default */](
+        window.innerWidth / 2,
+        window.innerHeight,
+        'heroCanvas',
+        10
+    ),
+    coinCanvas = new __WEBPACK_IMPORTED_MODULE_1__Canvas__["a" /* default */](
+        window.innerWidth,
+        window.innerHeight,
+        'coinCanvas',
+        10
+    );
+
+const score = new __WEBPACK_IMPORTED_MODULE_8__Score__["a" /* default */]();
+const mainAudio = new __WEBPACK_IMPORTED_MODULE_6__Audio__["a" /* default */]('./assets/audio/background-music.mp3');
+mainAudio.sound.setAttribute('loop', 'true');
+
+const bg = new __WEBPACK_IMPORTED_MODULE_2__Background__["a" /* default */](bgCanvas);
+let run = null,
+    jump = null;
+
+let coins = null,
+    cactuses = null;
+
+let isRender = null,
+    hero = null;
+
+let levelScheme = null;
+
+function mainLoop() {
+    if (isRender) {
+        areOnStage();
+        heroSwitch();
+        checkWin();
+        Object(__WEBPACK_IMPORTED_MODULE_7__catchCoin__["a" /* default */])(hero, coins, score);
+        if (cactuses.length) {
+            checkDead();
+        }
+        coinCanvas.render(coins.concat(cactuses));
+        heroCanvas.render([hero]);
+        bgCanvas.render(bg, window.performance.now());
+    }
+
+    requestAnimationFrame(mainLoop);
+}
+function areOnStage() {
+    for (let i = 0; i < cactuses.length; i++) {
+        if (cactuses[i].posX < -20) {
+            cactuses.splice(i, 1);
+            return;
+        }
+    }
+    for (let i = 0; i < coins.length; i++) {
+        if (coins[i].posX < -20) {
+            coins.splice(i, 1);
+            return;
+        }
+    }
+}
+function checkWin() {
+    if (coins.length === 0) {
+        mainAudio.stop();
+        isRender = false;
+        Object(__WEBPACK_IMPORTED_MODULE_9__getModal__["a" /* default */])('win', score.score);
+    }
+}
+function checkDead() {
+    if (hero.crashWith(cactuses[0])) {
+        mainAudio.stop();
+        isRender = false;
+        Object(__WEBPACK_IMPORTED_MODULE_9__getModal__["a" /* default */])('loose', score.score);
+    }
+}
+function heroSwitch() {
+    if (hero.isJump) {
+        hero = jump;
+        run.isJump = false;
+    } else {
+        hero = run;
+        jump.isJump = true;
+    }
+}
+function gameInit() {
+    levelScheme = __WEBPACK_IMPORTED_MODULE_10__LevelHandler__["a" /* default */].getLevelScheme();
+    score.restart();
+    run = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */]('run', heroCanvas.canvas.height, false, false, 10);
+    jump = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */]('jump', heroCanvas.canvas.height, true, false, 18);
+    coins = Object(__WEBPACK_IMPORTED_MODULE_4__createCoins__["a" /* default */])(run.posY + run.height / 1.5, levelScheme);
+    cactuses = Object(__WEBPACK_IMPORTED_MODULE_5__createCactuses__["a" /* default */])(run.posY + run.height / 2, levelScheme);
+    hero = run;
+    mainAudio.play();
+    isRender = true;
+}
+window.addEventListener('load', event => {
+    gameInit();
+    mainLoop();
+});
+window.addEventListener('keydown', event => {
+    if (event.keyCode === 32) {
+        event.preventDefault();
+        if (hero === run) {
+            hero.isJump = true;
+        }
+    }
+});
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__ = __webpack_require__(0);
 
 
@@ -122,7 +319,7 @@ class Coin extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
 
 
 /***/ }),
-/* 2 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -130,180 +327,17 @@ const img = new Image ();
 img.src = './assets/img/Caktus.png';
 
 class Cactus {
-    constructor (posX, posY) {
+    constructor (posX, posY, speed) {
         this.img = img;
         this.height = 100;
         this.width = 100;
         this.posX = posX;
         this.posY = posY;
         this.tick = 0;
+        this.speed = speed;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Cactus;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// 1 - coin,
-// 2 - cactus
-
-/* harmony default export */ __webpack_exports__["a"] = ([
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 2, 0, 1, 1, 1, 1, 1, 0, 2, 0, 1, 1, 0, 2, 1, 0, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 1]
-]);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Audio {
-    constructor(src) {
-        this.sound = document.createElement ('audio');
-        this.sound.src = src;
-        this.sound.setAttribute ('preload', 'auto');
-        this.sound.setAttribute ('controls', 'none');
-        this.sound.style.display = 'none';
-        document.body.appendChild (this.sound);
-    }
-
-    play() {
-        this.sound.play ();
-    }
-    stop() {
-        this.sound.pause ();
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Audio;
-
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game_scss__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__game_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Canvas__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Background__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Hero__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createCoins__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__createCactuses__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Audio__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__catchCoin__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Score__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__getModal__ = __webpack_require__(15);
-
-
-
-
-
-
-
-
-
-
-
-const bgCanvas = new __WEBPACK_IMPORTED_MODULE_1__Canvas__["a" /* default */] (window.innerWidth, window.innerHeight, 'bg', 0);
-const heroCanvas = new __WEBPACK_IMPORTED_MODULE_1__Canvas__["a" /* default */] (
-    window.innerWidth / 2,
-    window.innerHeight,
-    'heroCanvas',
-    10
-);
-const coinCanvas = new __WEBPACK_IMPORTED_MODULE_1__Canvas__["a" /* default */] (
-    window.innerWidth,
-    window.innerHeight,
-    'coinCanvas',
-    10
-);
-
-const score = new __WEBPACK_IMPORTED_MODULE_8__Score__["a" /* default */] ();
-//const mainAudio = new Audio ('./Jamie T - zombie.mp3');
-const dieAudio = new __WEBPACK_IMPORTED_MODULE_6__Audio__["a" /* default */] ('./assets/audio/die.wav');
-
-const bg = new __WEBPACK_IMPORTED_MODULE_2__Background__["a" /* default */] (bgCanvas);
-const run = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */] ('run', heroCanvas.canvas.height, false, false, 10);
-const jump = new __WEBPACK_IMPORTED_MODULE_3__Hero__["a" /* default */] ('jump', heroCanvas.canvas.height, true, false, 15);
-
-const coins = Object(__WEBPACK_IMPORTED_MODULE_4__createCoins__["a" /* default */]) (run.posY + run.height / 1.5);
-const cactuses = Object(__WEBPACK_IMPORTED_MODULE_5__createCactuses__["a" /* default */]) (run.posY + run.height / 2);
-
-let isRender = true;
-
-let hero = run;
-
-function mainLoop() {
-    if (isRender) {
-        areOnStage ();
-        heroSwitch ();
-        checkWin ();
-        Object(__WEBPACK_IMPORTED_MODULE_7__catchCoin__["a" /* default */]) (hero, coins, score);
-        checkDead ();
-        coinCanvas.render (coins.concat (cactuses));
-        heroCanvas.render ([hero]);
-        bgCanvas.render (bg, window.performance.now ());
-    }
-
-    requestAnimationFrame (mainLoop);
-}
-function areOnStage() {
-    for (let i =0; i<cactuses.length; i++) {
-        if (cactuses[i].posX < -20) {
-            cactuses.splice (i, 1);
-            return;
-        }
-    }
-    for (let i = 0; i < coins.length; i++) {
-        if (coins[i].posX < -20) {
-            coins.splice (i, 1);
-            return;
-        }
-    }   
-}
-function checkWin() {
-    if (coins.length === 0) {
-       // mainAudio.stop ();
-        isRender = false;
-        Object(__WEBPACK_IMPORTED_MODULE_9__getModal__["a" /* default */]) ('win', score.score);
-    }
-}
-function checkDead() {
-    if (hero.crashWith (cactuses[0])) {
-        //mainAudio.stop ();
-        dieAudio.play ();
-        isRender = false;
-        Object(__WEBPACK_IMPORTED_MODULE_9__getModal__["a" /* default */]) ('loose', score.score);
-        console.log (hero.posX, cactuses[0].posX);
-    }
-}
-function heroSwitch() {
-    if (hero.isJump) {
-        hero = jump;
-        run.isJump = false;
-    } else {
-        hero = run;
-        jump.isJump = true;
-    }
-}
-window.onload = function() {
-    //mainAudio.play ();
-    mainLoop ();
-};
-window.onkeydown = event => {
-    if (event.keyCode === 32) {
-        if (hero === run) {
-            hero.isJump = true;
-        }
-    }
-};
 
 
 /***/ }),
@@ -317,46 +351,48 @@ window.onkeydown = event => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Coin__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Coin__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SpriteSheet__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Cactus__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Cactus__ = __webpack_require__(5);
 
 
 
 
 class Canvas {
     constructor(width, height, id, zIndex) {
-        this.canvas = document.createElement ('canvas');
+        this.canvas = document.createElement('canvas');
         this.canvas.width = width;
         this.canvas.height = height;
         this.canvas.id = id;
         this.canvas.style.zIndex = zIndex;
-        this.ctx = this.canvas.getContext ('2d');
-        document.body.appendChild (this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+        document.body.appendChild(this.canvas);
     }
     render(elements, time) {
-        this.ctx.save ();
-        this.ctx.clearRect (0, 0, this.canvas.width, this.canvas.height);
-        if (Array.isArray (elements)) {
-            elements.forEach (item => {
-                if (item instanceof __WEBPACK_IMPORTED_MODULE_1__SpriteSheet__["a" /* default */]) {
-                    this.drawSprite (item);
-                } else if (item instanceof __WEBPACK_IMPORTED_MODULE_2__Cactus__["a" /* default */]) {
-                    this.drawCactus (item);
-                }
+        this.ctx.save();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        if (Array.isArray(elements)) {
+            elements.forEach(item => {
+                // if (item.posX < window.innerWidth) {
+                    if (item instanceof __WEBPACK_IMPORTED_MODULE_1__SpriteSheet__["a" /* default */]) {
+                        this.drawSprite(item);
+                    } else if (item instanceof __WEBPACK_IMPORTED_MODULE_2__Cactus__["a" /* default */]) {
+                        this.drawCactus(item);
+                    }
+                // }
             });
         } else {
-            this.drawBackground (elements, time);
+            this.drawBackground(elements, time);
         }
-        this.ctx.restore ();
+        this.ctx.restore();
     }
     drawCactus(item) {
         item.tick++;
-        if (item.tick > 5) {
+        if (item.tick > item.speed) {
             item.tick = 0;
-            item.posX -= 35;
+            item.posX -= 30;
         }
-        this.ctx.drawImage (
+        this.ctx.drawImage(
             item.img,
             0,
             0,
@@ -371,7 +407,7 @@ class Canvas {
     drawSprite(item) {
         const spt = item.frames[item.frameIndex];
         item.tickCount += 1;
-        this.ctx.drawImage (
+        this.ctx.drawImage(
             item.img,
             spt.x,
             spt.y,
@@ -386,24 +422,20 @@ class Canvas {
         if (item.tickCount > item.speed) {
             item.tickCount = 0;
             if (item instanceof __WEBPACK_IMPORTED_MODULE_0__Coin__["a" /* default */]) {
-                item.posX -= 35;
+                item.posX -= 30;
             }
             if (item.isJump) {
                 if (item.frameIndex === 0 || item.frameIndex === 1) {
                     item.posY -= 150;
-                    //item.posX += 100;
                 }
                 if (item.frameIndex === 2) {
                     item.posY += 100;
-                    //item.posX -= 25;
                 }
                 if (item.frameIndex === 3) {
                     item.posY += 170;
-                    //item.posX -= 35;
                 }
                 if (item.frameIndex === 4) {
-                    item.posY = item.initPosY;
-                    //item.posX = item.initPosX;
+                    item.posY += 30;
                     item.isJump = false;
                 }
             }
@@ -412,26 +444,28 @@ class Canvas {
             } else {
                 item.frameIndex++;
             }
+            item.width = item.frames[item.frameIndex].w / item.sizeDelimiter;
+            item.height = item.frames[item.frameIndex].h / item.sizeDelimiter;
         }
     }
     drawBackground(element, time) {
-        element.distance += element.calcOffset (time);
+        element.distance += element.calcOffset(time);
         if (element.distance > this.canvas.width) {
             element.distance = 0;
         }
-        this.ctx.translate (-element.distance, 0);
+        this.ctx.translate(-element.distance, 0);
         for (const img of element.imgs) {
             let posY = 0,
                 { height } = this.canvas;
-            if (img.src.includes ('layer2')) {
+            if (img.src.includes('layer2')) {
                 posY = height - 275;
                 height = 275;
-            } else if (img.src.includes ('layer3')) {
+            } else if (img.src.includes('layer3')) {
                 posY = height - 120;
                 height = 120;
             }
-            this.ctx.drawImage (img, img.width, posY, this.canvas.width, height);
-            this.ctx.drawImage (img, 0, posY, this.canvas.width, height);
+            this.ctx.drawImage(img, img.width, posY, this.canvas.width, height);
+            this.ctx.drawImage(img, 0, posY, this.canvas.width, height);
         }
     }
 }
@@ -500,67 +534,28 @@ class Hero extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
         super (name, speed, 2);
         this.isJump = isJump;
         this.isDie = isDie;
-        this.initPosX = name !== 'jump' ? 200 : 150;
-        this.initPosY =
+        this.posX = 200;
+        this.posY =
             name !== 'jump'
                 ? canvasHeight - this.height
                 : canvasHeight - this.height - 15;
-        this.posX = this.initPosX;
-        this.posY = this.initPosY;
     }
     crashWith(otherobj) {
-        const myright = this.posX + this.width;
-        const mytop = this.posY - this.height;
-        const mybottom = this.posY;
-        const otherleft = otherobj.posX;
-        const othertop = otherobj.posY - otherobj.height;
-        const otherbottom = otherobj.posY;
-        const myleft = this.posX;
+        const myleft = this.posX+20;
+        const mytop = this.posY - 40;
+        const myright = this.posX + this.width - 30;
+        const mybottom = this.posY + this.height - 30;
+        const otherleft = otherobj.posX + 10;
+        const othertop = otherobj.posY + 10;
         const otherright = otherobj.posX + otherobj.width;
-        let crash = false;
+        const otherbottom = otherobj.posY + otherobj.height;
 
-        if (
-            (mybottom >= othertop &&
-                mybottom <= otherbottom &&
-                myright > otherleft &&
-                myright <= otherright) ||
-            (mybottom >= othertop &&
-                mybottom <= otherbottom &&
-                myleft >= otherleft &&
-                myleft <= otherright) ||
-            (mybottom >= othertop &&
-                mybottom <= otherbottom &&
-                myright >= otherright &&
-                myleft <= otherleft) ||
-            (mytop < otherbottom &&
-                mytop > othertop &&
-                myleft > otherleft &&
-                myleft < otherright) ||
-            (mytop < otherbottom &&
-                mytop > othertop &&
-                myright < otherright &&
-                myright > otherleft) ||
-            (mytop < otherbottom &&
-                mytop > othertop &&
-                myright > otherright &&
-                myleft < otherleft) ||
-            (mytop > othertop &&
-                mytop < otherbottom &&
-                myright > otherleft &&
-                myright < otherright) ||
-            (mytop > othertop &&
-                mytop < otherbottom &&
-                myleft > otherleft &&
-                myleft < otherright) ||
-            (mytop < othertop &&
-                mybottom > otherbottom &&
-                myleft < otherleft &&
-                myright > otherright)
-        ) {
-            crash = true;
-        }
-
-        return crash;
+        return myright < otherleft ||
+            mybottom < othertop ||
+            myleft > otherright ||
+            mytop > otherbottom
+            ? false
+            : true;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Hero;
@@ -572,23 +567,21 @@ class Hero extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Coin__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__level1__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Coin__ = __webpack_require__(4);
 
 
-
-/* harmony default export */ __webpack_exports__["a"] = (function(heroY) {
+/* harmony default export */ __webpack_exports__["a"] = (function(posY, arr) {
     const coins = [];
-    const pos = { x: 200, y: heroY };
+    const pos = { x: 200, y: posY };
 
-    for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_1__level1__["a" /* default */].length; i++) {
-        for (let j = 0; j < __WEBPACK_IMPORTED_MODULE_1__level1__["a" /* default */][i].length; j++) {
-            if (__WEBPACK_IMPORTED_MODULE_1__level1__["a" /* default */][i][j]===1) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr[i].length; j++) {
+            if (arr[i][j]===1) {
                 const coin = new __WEBPACK_IMPORTED_MODULE_0__Coin__["a" /* default */] (
                 'coin',
-                5,
+                4,
                 pos.x + 100 * j,
-                pos.y - 100 * (__WEBPACK_IMPORTED_MODULE_1__level1__["a" /* default */].length - i)
+                pos.y - 100 * (arr.length - i)
             );
             coins.push (coin);
             } 
@@ -603,21 +596,20 @@ class Hero extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__level1__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Cactus__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Cactus__ = __webpack_require__(5);
 
 
-
-/* harmony default export */ __webpack_exports__["a"] = (function (heroY) {
+/* harmony default export */ __webpack_exports__["a"] = (function (posY, arr) {
     const cactuses = [];
-    const pos = { x: 200, y: heroY };
+    const pos = { x: 200, y: posY };
 
-    for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_0__level1__["a" /* default */].length; i++) {
-        for (let j = 0; j < __WEBPACK_IMPORTED_MODULE_0__level1__["a" /* default */][i].length; j++) {
-            if (__WEBPACK_IMPORTED_MODULE_0__level1__["a" /* default */][i][j]===2) {
-                const cactus = new __WEBPACK_IMPORTED_MODULE_1__Cactus__["a" /* default */] (
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr[i].length; j++) {
+            if (arr[i][j]===2) {
+                const cactus = new __WEBPACK_IMPORTED_MODULE_0__Cactus__["a" /* default */] (
                 pos.x + 100 * j,
-                pos.y - 42
+                pos.y - 42,
+                4
             );
             cactuses.push (cactus);
             } 
@@ -632,10 +624,10 @@ class Hero extends __WEBPACK_IMPORTED_MODULE_0__SpriteSheet__["a" /* default */]
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Audio__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Audio__ = __webpack_require__(1);
 
 
-const coinPickSound = new __WEBPACK_IMPORTED_MODULE_0__Audio__["a" /* default */] ('./assets/audio/coinPick.wav');
+// const coinPickSound = new Audio ('./assets/audio/coinPick.wav');
 
 /* harmony default export */ __webpack_exports__["a"] = (function (hero, coins, score) {
     const l = coins.length; 
@@ -643,7 +635,7 @@ const coinPickSound = new __WEBPACK_IMPORTED_MODULE_0__Audio__["a" /* default */
         if (hero.crashWith (coins[i])) {        
             score.add (10);
             coins.splice (i, 1);
-            coinPickSound.play ();
+            new __WEBPACK_IMPORTED_MODULE_0__Audio__["a" /* default */] ('./assets/audio/coinPick.wav').play ();
             return;
         } 
     }
@@ -654,20 +646,33 @@ const coinPickSound = new __WEBPACK_IMPORTED_MODULE_0__Audio__["a" /* default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LevelHandler__ = __webpack_require__(2);
+
+
 class Score {
     constructor () { 
         this.score = 0;
-        this.parentElem = document.createElement ('span');
-        this.parentElem.classList.add ('score');
-        this.parentElem.innerText = 'Score: '
-        this.childElem = document.createElement ('span');
-        this.childElem.innerText = this.score;
-        this.parentElem.appendChild (this.childElem);
-        document.body.appendChild (this.parentElem);
+        this.div = document.createElement ('header');
+        this.levelSpan = document.createElement ('span');
+        this.levelSpan.innerText = `Level ${__WEBPACK_IMPORTED_MODULE_0__LevelHandler__["a" /* default */].level}`;
+        this.parentSpan = document.createElement ('span');
+        this.parentSpan.classList.add ('score');
+        this.parentSpan.innerText = 'Score: '
+        this.childSpan = document.createElement ('span');
+        this.childSpan.innerText = this.score;
+        this.parentSpan.appendChild (this.childSpan);
+        this.div.appendChild (this.levelSpan);
+        this.div.appendChild (this.parentSpan);
+        document.body.appendChild (this.div);
     }
     add (num) {
         this.score += num;
-        this.childElem.innerText = this.score;
+        this.childSpan.innerText = this.score;
+    }
+    restart () {
+        this.score = 0;
+        this.childSpan.innerText = this.score;
+        this.levelSpan.innerText = `Level ${__WEBPACK_IMPORTED_MODULE_0__LevelHandler__["a" /* default */].level}`;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Score;
@@ -675,26 +680,83 @@ class Score {
 
 /***/ }),
 /* 15 */
+/***/ (function(module, exports) {
+
+module.exports = {"1":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,1,0,1,0,0,1,1,0,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,1,1,0,1,0,0,1,1,0,1,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,1,0,0,0,0,1,1,0,1,1,0,0,1,0,1,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,2,0,0,1,0,0,1,1,1,1,0,0,2,0,0,1,0,1,1,1,2,1,1,0,0,0,0,0,1,0,0,0,0,0,2,0,0,0,0,1,1,0,0,0,1,1,0,0,2,1,1,1,1,1,0,0,0,1,1,0,1,1,2,1,1,1,1,0,0,2,0,0,0,0,0,0,0,0,0,0,1,0,0,2,0,0,1,0,0,1,1,1]],"2":[[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1],[0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,1,0,1,0,0,1],[1,1,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,1,1,0],[0,0,0,0,1,0,0,2,0,0,1,0,0,0,0,0,0,0,2,0,0,0,0,1,1,1,1,2,1,0,1,1,0,0,0,1,1,0,0,0,0,2,0,1,1,1,1,1,1,1,0,0,0,0,1,0,0,2,0,0,1,0,0,1,1,1,1,0,0,2,0,0,1,0]]}
+
+/***/ }),
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = (function(type, score) {
-    const overlay = document.createElement ('div');
-    const modal = document.createElement ('section');
-    const p = document.createElement ('p');
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__index__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LevelHandler__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Audio__ = __webpack_require__(1);
+
+
+
+
+const overlay = document.createElement ('div');
+const modal = document.createElement ('section');
+const p = document.createElement ('p');
+const BtnsSection = document.createElement ('section');
+const restartBtn = document.createElement ('a');
+const nextLvlBtn = document.createElement ('a');
+const backBtn = document.createElement ('a');
+const dieSound = new __WEBPACK_IMPORTED_MODULE_2__Audio__["a" /* default */]('./assets/audio/die.wav');
+const winSound = new __WEBPACK_IMPORTED_MODULE_2__Audio__["a" /* default */]('./assets/audio/win.wav');
+
+restartBtn.id = 'restart';
+nextLvlBtn.id = 'nextLvl';
+
+backBtn.href = 'index.html';
+restartBtn.href = '#';
+nextLvlBtn.href = '#';
+
+backBtn.innerText = 'back';
+restartBtn.innerText = 'restart';
+nextLvlBtn.innerText = 'next lvl';
+
+overlay.classList.add ('overlay');
+modal.classList.add ('modal');
+BtnsSection.classList.add ('btns-section');
+
+restartBtn.addEventListener ('click', (event) => {
+    event.preventDefault ();
+    buttonPressed (restartBtn);
+});
+nextLvlBtn.addEventListener ('click', (event) => {
+    event.preventDefault ();
+    __WEBPACK_IMPORTED_MODULE_1__LevelHandler__["a" /* default */].nextLevel();
+    buttonPressed (nextLvlBtn);
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (function (type, score) {
+    type === 'win' ? winSound.play () : dieSound.play ();
 
     p.innerText =
         type === 'win'
             ? `you finished with a score of ${score}`
             : `you are a looser, but you got ${score} points`;
-    overlay.classList.add ('overlay');
-    modal.classList.add ('modal');
 
+    BtnsSection.appendChild (type === 'win' && __WEBPACK_IMPORTED_MODULE_1__LevelHandler__["a" /* default */].isMoreLevels () ? nextLvlBtn : restartBtn);
+    BtnsSection.appendChild (backBtn);
     modal.appendChild (p);
+    modal.appendChild (BtnsSection);
     overlay.appendChild (modal);
     document.body.appendChild (overlay);
 });
-
+function buttonPressed (button) {
+    dieSound.stop ();
+    winSound.stop ();
+    BtnsSection.removeChild (backBtn);
+    BtnsSection.removeChild (button);
+    modal.removeChild (p);
+    modal.removeChild (BtnsSection);
+    overlay.removeChild(modal);
+    document.body.removeChild (overlay);
+    Object(__WEBPACK_IMPORTED_MODULE_0__index__["default"]) ();
+}
 
 /***/ })
 /******/ ]);
